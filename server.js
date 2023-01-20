@@ -2,14 +2,18 @@ const express = require("express"); // Common JS
 // import express from "express";
 require("colors");
 require("dotenv").config();
+const cors = require("cors");
 const connectDB = require("./dbinit");
-connectDB();
 const app = express();
-app.use(express.json());
-
 const carRoute = require("./routes/car");
 
 const PORT = 8080 || process.env.PORT;
+
+connectDB();
+
+//middleware
+app.use(express.json());
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log(req.method);
